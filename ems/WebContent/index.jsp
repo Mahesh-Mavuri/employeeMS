@@ -90,9 +90,11 @@
 						String lname = request.getParameter("addlname");
 						String email = request.getParameter("addemail");
 						String phone = request.getParameter("addphone");
-						//System.out.println("add employee" + fname + lname + email + phone);
+						System.out.println("add employee " + fname + " "+lname +" "+ email +" "+ phone);
 						update = addEmp1.addEmployee(fname, lname, email, phone);
-						request.setAttribute("addfname", null);
+						request.removeAttribute("addfname");
+						fname = request.getParameter("addfname");
+						System.out.println("add employee after db insert " + fname + " "+lname + " "+email + " "+phone);
 						Employee[] allemployee = addEmp1.getall();
 						int k = 1;
 						for (int i = 0; i < allemployee.length; i++) {
@@ -158,6 +160,7 @@
 							if (all[i].getStatus().equals("1")) {
 								if (all[i].getFname().equals(firstname1)) {
 									boolean edited = all[i].editEmployee(fname, lname, email, phone,id1);
+								}
 				%>
 				<tr>
 					<td><%=k++%></td>
@@ -203,7 +206,7 @@
 					}
 							}
 						}
-					} else {
+					 else {
 						//System.out.println("hello");
 						Employeedao ed = new Employeedao();
 						Employee[] allemployees = ed.getall();
