@@ -64,7 +64,7 @@ public class Employee {
 		try(Connection con = Employeedao.getConnection())
 		{
 			
-			System.out.println("connected");
+			//System.out.println("connected");
 			String sqlQuery=" update employee set fname=?, lname=?, email=?, phone=? where id=?";
 			PreparedStatement pstmt = con.prepareStatement(sqlQuery);
 			

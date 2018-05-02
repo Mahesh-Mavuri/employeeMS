@@ -22,12 +22,13 @@ function addEmployee()
 }
 function editEmployee(id,fname,lname,email,phone)
 {	
+	alert(" "+fname+" "+lname+" "+phone+" "+email+" "+id);
 	
-	
-	document.getElementById('fname').value=name;
-	document.getElementById('lname').value=branch;
-	document.getElementById('email').value=email;
-	document.getElementById('phone').value=phone;
-	document.getElementById('id').value=id;
+	document.getElementById('editfname').value=fname;
+	document.getElementById('editlname').value=lname;
+	document.getElementById('editemail').value=email;
+	document.getElementById('editphone').value=phone;
+	document.getElementById('identity').value=id;
 	document.getElementById('id02').style.display='block';
+	alert(" "+fname+" "+lname+" "+phone+" "+email+" "+id+"maheshmavuri");
 }

@@ -59,7 +59,7 @@
 							required><br> <label for="editphone"><b>Phone</b></label>
 						<input type="text" class="form-control" value=""
 							placeholder="Enter phone number" name="editphone" id="editphone"
-							required><br> <input type="hidden" id="id">
+							required><br> <input type="hidden" name="identity" id="identity" value="">
 						<button type="submit" value="submit" id="submit">Submit</button>
 						<button type="button"
 							onclick="document.getElementById('id02').style.display='none'"
@@ -82,6 +82,7 @@
 			<tbody>
 
 				<%
+					
 					if (request.getParameter("addfname") != null) {
 						Employeedao addEmp1 = new Employeedao();
 						boolean update = false;
@@ -89,51 +90,51 @@
 						String lname = request.getParameter("addlname");
 						String email = request.getParameter("addemail");
 						String phone = request.getParameter("addphone");
-						System.out.println(" " + fname + lname + email + phone);
+						//System.out.println("add employee" + fname + lname + email + phone);
 						update = addEmp1.addEmployee(fname, lname, email, phone);
-						System.out.println(update);
-						Employee[] allemployees = addEmp1.getall();
+						request.setAttribute("addfname", null);
+						Employee[] allemployee = addEmp1.getall();
 						int k = 1;
-						for (int i = 0; i < allemployees.length; i++) {
-							if (allemployees[i].getStatus().equals("1")) {
+						for (int i = 0; i < allemployee.length; i++) {
+							if (allemployee[i].getStatus().equals("1")) {
 				%>
 				<tr>
 					<td><%=k++%></td>
 					<td>
 						<%
-							out.print(allemployees[i].getFname());
+							out.print(allemployee[i].getFname());
 						%>
 					</td>
 					<td>
 						<%
-							out.print(allemployees[i].getLname());
+							out.print(allemployee[i].getLname());
 						%>
 					</td>
 					<td>
 						<%
-							out.print(allemployees[i].getEmail());
+							out.print(allemployee[i].getEmail());
 						%>
 					</td>
 					<td>
 						<%
-							out.print(allemployees[i].getPhone());
+							out.print(allemployee[i].getPhone());
 						%>
 					</td>
 					<td>
 						<%
-							out.print(allemployees[i].getDoj());
+							out.print(allemployee[i].getDoj());
 						%>
 					</td>
 					<td><button type="button" class="btn btn-default btn-xs"
 							style="color: green; border: none; padding: 0; background: none;"
-							onclick="editEmployee('<%=allemployees[i].getId()%>','<%=allemployees[i].getFname()%>','<%=allemployees[i].getLname()%>''<%=allemployees[i].getEmail()%>','<%=allemployees[i].getPhone()%>')"
-							name="<%=allemployees[i].getId()%>">
+							onclick="editEmployee('<%=allemployee[i].getId()%>','<%=allemployee[i].getFname()%>','<%=allemployee[i].getLname()%>','<%=allemployee[i].getEmail()%>','<%=allemployee[i].getPhone()%>')"
+							name="<%=allemployee[i].getId()%>">
 							<span class="glyphicon glyphicon-pencil"></span>
 						</button>
 						<button type="button" class="btn btn-default btn-xs"
 							style="color: red; border: none; padding: 0; background: none;"
-							onclick="removeEmployee(<%=allemployees[i].getId()%>)"
-							name="<%=allemployees[i].getId()%>">
+							onclick="removeEmployee(<%=allemployee[i].getId()%>)"
+							name="<%=allemployee[i].getId()%>">
 							<span class="glyphicon glyphicon-remove-sign"></span>
 						</button>
 				</tr>
@@ -148,14 +149,15 @@
 						String lname = request.getParameter("editlname");
 						String email = request.getParameter("editemail");
 						String phone = request.getParameter("editphone");
-						String id = request.getParameter("id");
-						int j = Integer.parseInt(request.getParameter("id"));
+						String id1 = request.getParameter("identity");
+						System.out.println("edit employee" +fname+" "+lname+" "+email+" "+phone+" "+request.getParameter("identity"));
+						int j = Integer.parseInt(id1);
 						Employee e1 = new Employee();
 						String firstname1 = e1.getfNamewithId(j);
 						for (int i = 0; i < all.length; i++) {
 							if (all[i].getStatus().equals("1")) {
 								if (all[i].getFname().equals(firstname1)) {
-									boolean edited = all[i].editEmployee(fname, lname, email, phone, id);
+									boolean edited = all[i].editEmployee(fname, lname, email, phone,id1);
 				%>
 				<tr>
 					<td><%=k++%></td>
@@ -186,7 +188,7 @@
 					</td>
 					<td><button type="button" class="btn btn-default btn-xs"
 							style="color: green; border: none; padding: 0; background: none;"
-							onclick="editEmployee('<%=all[i].getId()%>','<%=all[i].getFname()%>','<%=all[i].getLname()%>''<%=all[i].getEmail()%>','<%=all[i].getPhone()%>')"
+							onclick="editEmployee('<%=all[i].getId()%>','<%=all[i].getFname()%>','<%=all[i].getLname()%>','<%=all[i].getEmail()%>','<%=all[i].getPhone()%>')"
 							name="<%=all[i].getId()%>">
 							<span class="glyphicon glyphicon-pencil"></span>
 						</button>
@@ -237,7 +239,9 @@
 						%>
 					</td>
 					<td><button type="button" class="btn btn-default btn-xs"
-							style="color: green; border: none; padding: 0; background: none;">
+							style="color: green; border: none; padding: 0; background: none;"
+							onclick="editEmployee('<%=allemployees[i].getId()%>','<%=allemployees[i].getFname()%>','<%=allemployees[i].getLname()%>','<%=allemployees[i].getEmail()%>','<%=allemployees[i].getPhone()%>')"
+							name="<%=allemployees[i].getId()%>">
 							<span class="glyphicon glyphicon-pencil"></span>
 						</button>
 						<button type="button" class="btn btn-default btn-xs"
