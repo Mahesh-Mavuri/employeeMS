@@ -1,3 +1,4 @@
+
 function removeEmployee(i)
 {
 	  var xhttp = new XMLHttpRequest();
@@ -18,6 +19,7 @@ function addEmployee()
 	document.getElementById('addlname').value="";
 	document.getElementById('addemail').value="";
 	document.getElementById('addphone').value="";
+	document.getElementById('addphone').value="fine";
 	
 }
 function editEmployee(id,fname,lname,email,phone)

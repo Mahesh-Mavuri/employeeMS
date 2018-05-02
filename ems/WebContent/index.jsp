@@ -36,6 +36,7 @@
 						<input type="text" class="form-control"
 							placeholder="Enter phone number" name="addphone" id="addphone"
 							required><br>
+							<input type="hidden" name="adderror"  id="adderror" value="1">
 						<button type="submit" id="addEmp" name="addEmp">Submit</button>
 						<button type="button"
 							onclick="document.getElementById('id01').style.display='none'"
@@ -83,18 +84,21 @@
 
 				<%
 					
-					if (request.getParameter("addfname") != null) {
+					if (request.getParameter("addfname") != null && request.getParameter("adderror")!= null ) {
 						Employeedao addEmp1 = new Employeedao();
 						boolean update = false;
+						
 						String fname = request.getParameter("addfname");
 						String lname = request.getParameter("addlname");
 						String email = request.getParameter("addemail");
 						String phone = request.getParameter("addphone");
-						System.out.println("add employee " + fname + " "+lname +" "+ email +" "+ phone);
+						String fna = request.getParameter("adderror");
+						System.out.println("add employee " + fname + " "+lname +" "+ email +" "+ phone+" "+fna);
 						update = addEmp1.addEmployee(fname, lname, email, phone);
-						request.removeAttribute("addfname");
-						fname = request.getParameter("addfname");
-						System.out.println("add employee after db insert " + fname + " "+lname + " "+email + " "+phone);
+						//System.out.println(request.getParameterValues("addfname").toString());
+						request.setAttribute("adderror",null);
+						fna = request.getParameter("adderror");
+						System.out.println("add employee after db insert " + fname + " "+lname + " "+email + " "+phone+"fna    "+fna);
 						Employee[] allemployee = addEmp1.getall();
 						int k = 1;
 						for (int i = 0; i < allemployee.length; i++) {
@@ -106,6 +110,7 @@
 						<%
 							out.print(allemployee[i].getFname());
 						%>
+						
 					</td>
 					<td>
 						<%
