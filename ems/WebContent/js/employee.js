@@ -28,5 +28,6 @@ function editEmployee(id,fname,lname,email,phone)
 	document.getElementById('lname').value=branch;
 	document.getElementById('email').value=email;
 	document.getElementById('phone').value=phone;
+	document.getElementById('id').value=id;
 	document.getElementById('id02').style.display='block';
 }

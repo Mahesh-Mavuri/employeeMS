@@ -68,26 +68,6 @@ public class Employeedao {
 		return flag;
 		
 	}
-	public boolean editEmployee(String fname, String lname, String email,String phone, String id1) throws SQLException
-	{	boolean edit=false;
-		int id = Integer.parseInt(id1);
-		try(Connection con = getConnection())
-		{
-			
-			System.out.println("connected");
-			String sqlQuery=" update employee set fname=?, lname=?, email=?, phone=? where id=?";
-			PreparedStatement pstmt = con.prepareStatement(sqlQuery);
-			
-			pstmt.setString(1,fname);
-			pstmt.setString(2,lname);
-			pstmt.setString(3,email);
-			pstmt.setString(4,phone);
-			pstmt.setInt(5,id);
-			int updated = pstmt.executeUpdate();
-			System.out.println("rows affected "+updated);
-			edit=true;
-		}
-		return edit;
-	}
+	
 	
 }
